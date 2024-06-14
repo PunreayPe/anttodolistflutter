@@ -27,7 +27,7 @@ class Helpers {
     final DateTime taskDate = _stringToDateTime(task.date);
     if(taskDate.year == selectDate.year &&
         taskDate.month == selectDate.month /*&&
-        taskDate.day == selectDate.day*/){ // Error here
+        taskDate.day == selectDate.day*/){ // Error laeng ng haekkk
       return true;
     }
     return false;
