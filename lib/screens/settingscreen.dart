@@ -1,4 +1,4 @@
-import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -64,14 +64,27 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+  
   void _showDialogWarningMessage(BuildContext context) {
-    ArtSweetAlert.show(
+    showCupertinoDialog(
       context: context, 
-      artDialogArgs: ArtDialogArgs(
-        type: ArtSweetAlertType.warning,
-        title: "សូមអភ័យទោស!",
-        text: "ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!",
-      )
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('សូមអភ័យទោស!'),
+          content: const Text("ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!"),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('ចាកចេញ',
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+        
+      },
     );
   }
 }

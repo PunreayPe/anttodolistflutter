@@ -6,7 +6,7 @@ import 'package:ant_todo_list/screens/create_task_screen.dart';
 import 'package:ant_todo_list/screens/settingscreen.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 import 'package:ant_todo_list/widgets/widgets.dart';
-import 'package:art_sweetalert/art_sweetalert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -321,13 +321,25 @@ class Homescreens extends ConsumerWidget {
   }
 
   void _showDialogWarningMessage(BuildContext context) {
-    ArtSweetAlert.show(
+    showCupertinoDialog(
       context: context, 
-      artDialogArgs: ArtDialogArgs(
-        type: ArtSweetAlertType.warning,
-        title: "សូមអភ័យទោស!",
-        text: "ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!",
-      )
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('សូមអភ័យទោស!'),
+          content: const Text("ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!"),
+          actions: [
+            CupertinoDialogAction(
+              child: const Text('ចាកចេញ',
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+        
+      },
     );
   }
 }

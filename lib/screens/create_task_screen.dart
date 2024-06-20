@@ -18,7 +18,8 @@ class CreateTaskScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
-
+  
+  TaskDataSource task = TaskDataSource(); // not yet test 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -28,7 +29,13 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
     _noteController.dispose();
     super.dispose();
   }
-  // បន្ថែមការងារថ្មី
+  
+  // not yet test
+  void init() {
+    task.getAllTask();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
