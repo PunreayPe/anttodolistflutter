@@ -6,6 +6,7 @@ import 'package:ant_todo_list/screens/create_task_screen.dart';
 import 'package:ant_todo_list/screens/settingscreen.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 import 'package:ant_todo_list/widgets/widgets.dart';
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -46,7 +47,7 @@ class Homescreens extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              //
+              _showDialogWarningMessage(context);
             },
           ),
         ],
@@ -190,7 +191,7 @@ class Homescreens extends ConsumerWidget {
                   leading: const Icon(Icons.task_rounded),
                   title: const Text('ការងារទាំងអស់'),
                   onTap: () {
-                    Navigator.pop(context);
+                    _showDialogWarningMessage(context);
                   },
                 ),
                 ListTile(
@@ -219,7 +220,7 @@ class Homescreens extends ConsumerWidget {
                   leading: const Icon(Icons.bug_report),
                   title: const Text('រាយការណ៍ពីកំហុសក្នុងកម្មវិធី'),
                   onTap: () {
-                    Navigator.pop(context);
+                    _showDialogWarningMessage(context);
                   },
                 ),
                 ListTile(
@@ -316,6 +317,17 @@ class Homescreens extends ConsumerWidget {
           ],
         );
       },
+    );
+  }
+
+  void _showDialogWarningMessage(BuildContext context) {
+    ArtSweetAlert.show(
+      context: context, 
+      artDialogArgs: ArtDialogArgs(
+        type: ArtSweetAlertType.warning,
+        title: "សូមអភ័យទោស!",
+        text: "ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!",
+      )
     );
   }
 }
