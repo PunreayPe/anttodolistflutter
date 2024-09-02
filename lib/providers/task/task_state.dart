@@ -3,12 +3,12 @@ import 'package:ant_todo_list/data/models/task.dart';
 
 class TaskState extends Equatable {
   final List<Task> tasks;
-  
+
   const TaskState(this.tasks);
 
   const TaskState.initial({
-      this.tasks = const [],
-    });
+    this.tasks = const [],
+  });
   TaskState copyWith({
     List<Task>? tasks,
   }) {

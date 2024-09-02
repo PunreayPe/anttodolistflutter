@@ -2,16 +2,18 @@ import 'package:ant_todo_list/config/theme/theme_notifier.dart';
 import 'package:ant_todo_list/data/datasource/task_datasource.dart';
 import 'package:ant_todo_list/data/models/task.dart';
 import 'package:ant_todo_list/providers/providers.dart';
+import 'package:ant_todo_list/screens/abtdev.dart';
 import 'package:ant_todo_list/screens/create_task_screen.dart';
 import 'package:ant_todo_list/screens/settingscreen.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 import 'package:ant_todo_list/widgets/widgets.dart';
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final Uri _url = Uri.parse('https://antkh.com/');
@@ -35,19 +37,24 @@ class Homescreens extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('អានធូឌូលីស'),
         leading: Builder(
-          builder: (context) =>
-              IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
+          builder: (context) => IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.account_circle),
             onPressed: () {
-              _showDialogWarningMessage(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AboutDeveloper(),
+                ),
+              );
             },
           ),
         ],
@@ -64,18 +71,29 @@ class Homescreens extends ConsumerWidget {
                 child: Column(
                   children: [
                     const Gap(10),
-                    InkWell(
-                      onTap: () => Helpers.selectDate(context, ref),
-                      child: DisplayWhiteText(
-                        text: DateFormat.yMMMMd().format(selectDate),
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal,
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      height: deviceSize.height * 0.12,
+                      decoration: BoxDecoration(
+                        color: colors.primaryContainer,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: DatePicker(
+                        DateTime.now(),
+                        width: 72,
+                        selectionColor: colors.primary,
+                        initialSelectedDate: selectDate,
+                        selectedTextColor: colors.surfaceContainerLowest,
+                        onDateChange: (selectedDate) {
+                          ref.read(dateProvider.notifier).state = selectedDate;
+                        },
+                        daysCount: 7,
                       ),
                     ),
                     const Gap(10),
                     const DisplayWhiteText(
                       text: 'ការងារដែលមិនទាន់រួចរាល់',
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.w400,
                     ),
                   ],
@@ -84,7 +102,7 @@ class Homescreens extends ConsumerWidget {
             ],
           ),
           Positioned(
-            top: 70,
+            top: 120,
             left: 0,
             right: 0,
             child: SafeArea(
@@ -97,7 +115,7 @@ class Homescreens extends ConsumerWidget {
                     DisplayListOfTask(
                       tasks: incompleteTask,
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     Text(
                       'ការងារបានធ្វើរួចរាល់',
                       style: context.textTheme.headlineSmall,
@@ -107,24 +125,22 @@ class Homescreens extends ConsumerWidget {
                       tasks: completeTask,
                       isCompletedTask: true,
                     ),
-                    const Gap(20),
+                    const Gap(10),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CreateTaskScreen()
+                            builder: (context) => const CreateTaskScreen(),
                           ),
                         );
                       },
                       child: const Padding(
-                        padding: EdgeInsets.all(6.0),
-                        child: Text('បន្ថែមការងារថ្មី',
-                          style: TextStyle(
-                            fontSize: 20
-                          ),
-                        )
-                      ),
+                          padding: EdgeInsets.all(6.0),
+                          child: Text(
+                            'បន្ថែមការងារថ្មី',
+                            style: TextStyle(fontSize: 20),
+                          )),
                     ),
                   ],
                 ),
@@ -160,6 +176,7 @@ class Homescreens extends ConsumerWidget {
     }
     return filteredTask;
   }
+
   Widget _buildDrawer(BuildContext context, WidgetRef ref) {
     final isDarkMode = ref.watch(themeNotifierProvider) == ThemeMode.dark;
 
@@ -233,7 +250,7 @@ class Homescreens extends ConsumerWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.person),
-                  title: const Text('អំពីអ្នកបង្កើតកម្មវិធី'),
+                  title: const Text('អំពីកម្មវិធី'),
                   onTap: () {
                     _showDeveloperInfoDialog(context);
                   },
@@ -285,7 +302,7 @@ class Homescreens extends ConsumerWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('អំពីអ្នកបង្កើតកម្មវិធី'),
-          content: const SingleChildScrollView(
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text('ឈ្មោះ: ប៉េ ពន្ធរាយ'),
@@ -299,9 +316,18 @@ class Homescreens extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.facebook),
-                    Icon(Icons.youtube_searched_for),
-                    Icon(Icons.email),
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.facebookF),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.youtube),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: FaIcon(FontAwesomeIcons.linkedin),
+                      onPressed: () {},
+                    ),
                   ],
                 )
               ],
@@ -322,14 +348,16 @@ class Homescreens extends ConsumerWidget {
 
   void _showDialogWarningMessage(BuildContext context) {
     showCupertinoDialog(
-      context: context, 
+      context: context,
       builder: (context) {
         return CupertinoAlertDialog(
           title: const Text('សូមអភ័យទោស!'),
-          content: const Text("ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!"),
+          content: const Text(
+              "ចំពោះត្រង់ចំណុច function នេះគឺមិនដំណើរទេ!\nតែនឹងដំណើរការនៅកំណែទម្រង់ក្រោយទៀត\nសូមអរគុណ!"),
           actions: [
             CupertinoDialogAction(
-              child: const Text('ចាកចេញ',
+              child: const Text(
+                'ចាកចេញ',
                 style: TextStyle(color: Colors.red),
               ),
               onPressed: () {
@@ -338,7 +366,6 @@ class Homescreens extends ConsumerWidget {
             ),
           ],
         );
-        
       },
     );
   }

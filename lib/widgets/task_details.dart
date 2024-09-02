@@ -41,8 +41,9 @@ class TaskDetails extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                
                 const Text('ការងារនឹងត្រូវបញ្ចប់នៅថ្ងៃ៖ '),
-                Text(task.date),
+                Text(task.date), 
                 Icon(
                   Icons.check_box, 
                   color: task.category.color,

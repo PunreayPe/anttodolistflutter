@@ -3,7 +3,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 @immutable
-class AppTheme{
+class AppTheme {
   // private constuctor
   const AppTheme._();
   static final light = FlexThemeData.light(
@@ -34,9 +34,9 @@ class AppTheme{
       blendOnColors: true,
       blendTextTheme: true,
       popupMenuOpacity: 0.95,
-    )
+    ),
   );
-  // Still Error error
+
   static final dark = FlexThemeData.dark(
     scheme: FlexScheme.deepBlue,
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
@@ -48,7 +48,7 @@ class AppTheme{
     tabBarStyle: FlexTabBarStyle.forBackground,
     tooltipsMatchBackground: true,
     swapColors: true,
-    darkIsTrueBlack: false, 
+    darkIsTrueBlack: false,
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     fontFamily: GoogleFonts.notoSansKhmer().fontFamily,
     subThemesData: const FlexSubThemesData(

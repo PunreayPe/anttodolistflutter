@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 
 @immutable
-class DBKeys{
+class DBKeys {
   const DBKeys._();
   static const String dbName = 'task.db';
   static const String dbTable = 'task';
@@ -13,5 +13,4 @@ class DBKeys{
   static const String dateColumn = TaskKeys.date;
   static const String categoryColumn = TaskKeys.category;
   static const String isCompletedColumn = TaskKeys.isCompleted;
-
 }

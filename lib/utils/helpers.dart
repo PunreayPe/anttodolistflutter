@@ -7,53 +7,51 @@ import 'package:intl/intl.dart';
 class Helpers {
   Helpers._();
 
-  static String timeToString(TimeOfDay time){
+  static String timeToString(TimeOfDay time) {
     try {
       final DateTime now = DateTime.now();
       final date = DateTime(
-        now.year, 
-        now.month, 
-        now.day, 
-        time.hour, 
+        now.year,
+        now.month,
+        now.day,
+        time.hour,
         time.minute,
       );
       return DateFormat.jm().format(date);
-    } catch (e){
+    } catch (e) {
       return '12:00 pm';
     }
   }
 
-  static bool isTaskFromSelectDate(Task task, DateTime selectDate){
+  static bool isTaskFromSelectDate(Task task, DateTime selectDate) {
     final DateTime taskDate = _stringToDateTime(task.date);
-    if(taskDate.year == selectDate.year &&
-        taskDate.month == selectDate.month /*&&
-        taskDate.day == selectDate.day*/){ // Error laeng ng haekkk
+    if (taskDate.year == selectDate.year &&
+        taskDate.month == selectDate.month &&
+        taskDate.day == selectDate.day) {
       return true;
     }
     return false;
   }
 
-  static DateTime _stringToDateTime(String dateString){
+  static DateTime _stringToDateTime(String dateString) {
     try {
       DateFormat format = DateFormat.yMMMMd();
       return format.parse(dateString);
     } catch (e) {
-        return DateTime.now();
+      return DateTime.now();
     }
   }
 
-  static void selectDate (BuildContext context, WidgetRef ref) async {
+  static void selectDate(BuildContext context, WidgetRef ref) async {
     final initialDate = ref.read(dateProvider);
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
-      firstDate: DateTime(2024), 
+      firstDate: DateTime(2024),
       lastDate: DateTime(2090),
     );
-    if(pickedDate != null){
-
+    if (pickedDate != null) {
       ref.read(dateProvider.notifier).state = pickedDate;
     }
   }
-
 }

@@ -1,7 +1,7 @@
 name: ant_todo_list
-description: "ANT TodoList"
+description: 'ANT TodoList'
 
-publish_to: 'none' 
+publish_to: 'none'
 
 version: '1.0.1'
 
@@ -20,12 +20,14 @@ dependencies:
   google_fonts: ^6.2.1
   intl: ^0.19.0
   path: ^1.9.0
-  sqflite: ^2.3.3  
+  sqflite: ^2.3.3
   smooth_page_indicator: ^1.1.0
   shared_preferences: ^2.2.3
   lottie: ^3.1.2
   url_launcher: ^6.2.6
   flutter_launcher_icons: ^0.13.1
+  date_picker_timeline: ^1.2.6
+  flutter_dropdown_alert: ^1.0.7
   #default packages
   cupertino_icons: ^1.0.6
 
@@ -34,9 +36,9 @@ dev_dependencies:
     sdk: flutter
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: 'launcher_icon'
   ios: true
-  image_path: "assets/icons/ANT_TODOLIST_Icons.png"
+  image_path: 'assets/icons/ANT_TODOLIST_Icons.png'
   min_sdk_android: 21 # android min sdk min:16, default 21
 
 #  flutter_lints: ^4.0.0

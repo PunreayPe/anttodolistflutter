@@ -12,17 +12,17 @@ class Task extends Equatable {
   final bool isCompleted;
 
   const Task({
-    this.id, 
-    required this.title, 
-    required this.note, 
-    required this.time, 
+    this.id,
+    required this.title,
+    required this.note,
+    required this.time,
     required this.date,
     required this.category,
     required this.isCompleted,
   });
 
   @override
-  List<Object> get props{
+  List<Object> get props {
     return [
       id!,
       title,
@@ -47,7 +47,7 @@ class Task extends Equatable {
 
   factory Task.fromJson(Map<String, dynamic> map) {
     return Task(
-      id: map[TaskKeys.id] ,
+      id: map[TaskKeys.id],
       title: map[TaskKeys.title],
       note: map[TaskKeys.note],
       time: map[TaskKeys.time],

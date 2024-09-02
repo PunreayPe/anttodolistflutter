@@ -11,7 +11,7 @@ class SeleteDateTime extends ConsumerWidget {
   const SeleteDateTime({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref){
+  Widget build(BuildContext context, WidgetRef ref) {
     final date = ref.watch(dateProvider);
     final time = ref.watch(timeProvider);
     return Row(
@@ -20,9 +20,9 @@ class SeleteDateTime extends ConsumerWidget {
           child: CommonTextField(
             readOnly: true,
             title: 'ថ្ងៃ',
-            hintText: DateFormat.yMMMMd().format(date),
+            hintText: DateFormat.yMd().format(date),
             suffixIcon: IconButton(
-              onPressed: () => Helpers.selectDate(context, ref), 
+              onPressed: () => Helpers.selectDate(context, ref),
               icon: const FaIcon(FontAwesomeIcons.calendar),
             ),
           ),
@@ -34,7 +34,7 @@ class SeleteDateTime extends ConsumerWidget {
             title: 'ម៉ោង',
             hintText: Helpers.timeToString(time),
             suffixIcon: IconButton(
-              onPressed: () => _selectTime(context, ref), 
+              onPressed: () => _selectTime(context, ref),
               icon: const FaIcon(FontAwesomeIcons.clock),
             ),
           ),
@@ -42,14 +42,14 @@ class SeleteDateTime extends ConsumerWidget {
       ],
     );
   }
+
   void _selectTime(BuildContext context, WidgetRef ref) async {
     TimeOfDay? pickedTime = await showTimePicker(
-      context: context, 
+      context: context,
       initialTime: TimeOfDay.now(),
     );
-    if(pickedTime != null){
-      ref.read(timeProvider.notifier).state = pickedTime; 
+    if (pickedTime != null) {
+      ref.read(timeProvider.notifier).state = pickedTime;
     }
   }
-  
 }

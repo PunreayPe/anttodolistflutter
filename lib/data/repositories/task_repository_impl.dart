@@ -1,12 +1,12 @@
 import 'package:ant_todo_list/data/data.dart';
 
-class TaskRepositoryImp implements TaskRepository{
+class TaskRepositoryImp implements TaskRepository {
   final TaskDataSource _datasource;
 
   TaskRepositoryImp(this._datasource);
 
   @override
-  Future<void> createTask(Task task) async{
+  Future<void> createTask(Task task) async {
     try {
       await _datasource.addTask(task);
     } catch (e) {
@@ -15,7 +15,7 @@ class TaskRepositoryImp implements TaskRepository{
   }
 
   @override
-  Future<void> deleteTask(Task task) async{
+  Future<void> deleteTask(Task task) async {
     try {
       await _datasource.deleteTask(task);
     } catch (e) {
@@ -24,7 +24,7 @@ class TaskRepositoryImp implements TaskRepository{
   }
 
   @override
-  Future<List<Task>> getAllTasks() async{
+  Future<List<Task>> getAllTasks() async {
     try {
       return await _datasource.getAllTask();
     } catch (e) {
@@ -33,12 +33,11 @@ class TaskRepositoryImp implements TaskRepository{
   }
 
   @override
-  Future<void> updateTask(Task task) async{
+  Future<void> updateTask(Task task) async {
     try {
       await _datasource.updateTask(task);
     } catch (e) {
       throw '$e';
     }
   }
-
 }
