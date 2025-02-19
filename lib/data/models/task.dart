@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
 import 'package:ant_todo_list/utils/task_category.dart';
 import 'package:ant_todo_list/utils/task_keys.dart';
+import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
   final int? id;

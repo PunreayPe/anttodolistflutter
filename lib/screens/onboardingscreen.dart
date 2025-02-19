@@ -10,7 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboardingscreen extends ConsumerWidget {
   static Onboardingscreen builder(BuildContext context, GoRouterState state) =>
-    Onboardingscreen();
+      Onboardingscreen();
   Onboardingscreen({super.key});
   final PageController _controller = PageController();
   final onLastPageProvider = StateProvider<bool>((ref) => false);
@@ -24,7 +24,7 @@ class Onboardingscreen extends ConsumerWidget {
           children: [
             PageView(
               controller: _controller,
-              onPageChanged: (index){
+              onPageChanged: (index) {
                 ref.read(onLastPageProvider.notifier).state = (index == 4);
               },
               children: const [
@@ -52,11 +52,10 @@ class Onboardingscreen extends ConsumerWidget {
               ],
             ),
             Container(
-              alignment: const Alignment(0,0.8),
+              alignment: const Alignment(0, 0.8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-        
                   SmoothPageIndicator(
                     effect: JumpingDotEffect(
                       activeDotColor: context.colorScheme.primary,
@@ -67,27 +66,28 @@ class Onboardingscreen extends ConsumerWidget {
                     controller: _controller,
                     count: 5,
                   ),
-
-                  onLastPage ?
-                   ElevatedButton(
-                      onPressed: () async {
-                      await updateInitStatus(true);
-                      Navigator.pushReplacementNamed(context, RouteLocation.home);
-                    },
-                    child: const Text('ចាប់ផ្តើម'),
-                  ) : IconButton(
-                    onPressed: () async {
-                      _controller.nextPage(
-                        duration: const Duration(milliseconds: 1200),
-                        curve: Curves.easeIn,
-                      );
-                    },
-                    icon: FaIcon(
-                      Icons.arrow_forward_ios,
-                    ),
-                    color: context.colorScheme.primary,
-                    tooltip: 'បន្ទាប់',
-                  ),
+                  onLastPage
+                      ? ElevatedButton(
+                          onPressed: () async {
+                            await updateInitStatus(true);
+                            Navigator.pushReplacementNamed(
+                                context, RouteLocation.home);
+                          },
+                          child: const Text('ចាប់ផ្តើម'),
+                        )
+                      : IconButton(
+                          onPressed: () async {
+                            _controller.nextPage(
+                              duration: const Duration(milliseconds: 1200),
+                              curve: Curves.easeIn,
+                            );
+                          },
+                          icon: FaIcon(
+                            Icons.arrow_forward_ios,
+                          ),
+                          color: context.colorScheme.primary,
+                          tooltip: 'បន្ទាប់',
+                        ),
                 ],
               ),
             ),
@@ -96,7 +96,8 @@ class Onboardingscreen extends ConsumerWidget {
       ),
     );
   }
-   Future<void> updateInitStatus(bool value) async {
+
+  Future<void> updateInitStatus(bool value) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('initScreen', value);
   }

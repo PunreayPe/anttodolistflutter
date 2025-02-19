@@ -9,7 +9,7 @@ Future<void> main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   initScreen = preferences.getBool('initScreen');
   runApp(
-    const ProviderScope(
+     ProviderScope(
       child: AntTodoList(),
     ),
   );

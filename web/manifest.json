@@ -1,6 +1,6 @@
 {
-    "name": "ant_todo_list",
-    "short_name": "ant_todo_list",
+    "name": "ant_todolist",
+    "short_name": "ant_todolist",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

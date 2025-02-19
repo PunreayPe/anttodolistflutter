@@ -18,8 +18,10 @@ class AntTodoList extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: 'splash',
       routes: {
-        'splash': (context) => const SplashScreen(),
-        RouteLocation.home: (context) => const Homescreens(),
+        'splash': (context) => SplashScreen(),
+        RouteLocation.home: (context) => Homescreens(
+              initDate: DateTime.now(),
+            ),
         'onboard': (context) => Onboardingscreen(),
       },
     );

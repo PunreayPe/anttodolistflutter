@@ -3,9 +3,9 @@ import 'package:ant_todo_list/providers/providers.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 import 'package:ant_todo_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class CreateTaskScreen extends ConsumerStatefulWidget {
@@ -18,7 +18,7 @@ class CreateTaskScreen extends ConsumerStatefulWidget {
 }
 
 class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
-  TaskDataSource task = TaskDataSource(); // not yet test
+  TaskDataSource task = TaskDataSource();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -119,12 +119,17 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
         category: category,
         isCompleted: false,
       );
-      await ref.read(taskProvider.notifier).createTask(task).then((value) {
-        AppAlerts.displaySnackBar(context, 'ការងាររបស់អ្នកត្រូវបានបង្កើត!');
-        Navigator.pop(context);
-      });
+      await ref.read(taskProvider.notifier).createTask(task).then(
+        (value) {
+          AppAlerts.newdisplaySnackBar(
+              context, 'ការងាររបស់អ្នកត្រូវបានបង្កើត!');
+
+          Navigator.pop(context);
+        },
+      );
     } else {
-      AppAlerts.displaySnackBar(context, 'សូមបញ្ចូលឈ្មោះការងាររបស់អ្នក');
+      AppAlerts.newdisplaySnackBar2(context, 'សូមបញ្ចូលឈ្មោះការងាររបស់អ្នក',
+          isCom: 3);
     }
   }
 }

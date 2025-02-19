@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class TaskDetails extends StatelessWidget {
-  const TaskDetails({
-    super.key, 
-    required this.task
-  });
+  const TaskDetails({super.key, required this.task});
   final Task task;
 
   @override
@@ -26,53 +23,52 @@ class TaskDetails extends StatelessWidget {
           ),
           const Gap(16),
           Text(
-            task.title, 
+            task.title,
             style: style.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 20,
             ),
           ),
           Text(
-            task.time,style: style.titleMedium,
+            task.time,
+            style: style.titleMedium,
           ),
           const Gap(16),
           Visibility(
-            visible: !task.isCompleted,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                
-                const Text('ការងារនឹងត្រូវបញ្ចប់នៅថ្ងៃ៖ '),
-                Text(task.date), 
-                Icon(
-                  Icons.check_box, 
-                  color: task.category.color,
-                ),
-              ],
-            )
-          ),
+              visible: !task.isCompleted,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('ការងារនឹងត្រូវបញ្ចប់នៅថ្ងៃ៖ '),
+                  Text(task.date),
+                  Icon(
+                    Icons.check_box,
+                    color: task.category.color,
+                  ),
+                ],
+              )),
           const Gap(16),
           Divider(
             color: task.category.color,
             thickness: 1.5,
           ),
           const Gap(16),
-          Text(
-            task.note.isEmpty 
-            ? 'មិនមានបន្ថែមសម្រាប់កិច្ចការនេះទេ!'
-            : task.note
-          ),
+          Text(task.note.isEmpty
+              ? 'មិនមានបន្ថែមសម្រាប់កិច្ចការនេះទេ!'
+              : task.note),
           const Gap(16),
           Visibility(
-            visible: task.isCompleted,
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('ការងារត្រូវបានបញ្ជប់'),
-                Icon(Icons.check_box, color: Colors.green,),
-              ],
-            )
-          ),
+              visible: task.isCompleted,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('ការងារត្រូវបានបញ្ជប់'),
+                  Icon(
+                    Icons.check_box,
+                    color: Colors.green,
+                  ),
+                ],
+              )),
         ],
       ),
     );

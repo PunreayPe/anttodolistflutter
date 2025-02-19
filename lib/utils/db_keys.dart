@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:ant_todo_list/utils/utils.dart';
+import 'package:flutter/material.dart';
 
 @immutable
 class DBKeys {
   const DBKeys._();
-  static const String dbName = 'task.db';
+  static const String dbName = 'task5.db';
   static const String dbTable = 'task';
   static const String idColumn = TaskKeys.id;
   static const String titleColumn = TaskKeys.title;

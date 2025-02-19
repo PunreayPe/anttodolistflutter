@@ -2,6 +2,7 @@ import 'package:ant_todo_list/data/models/task.dart';
 import 'package:ant_todo_list/providers/providers.dart';
 import 'package:ant_todo_list/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppAlerts {
@@ -17,6 +18,28 @@ class AppAlerts {
         ),
         backgroundColor: context.colorScheme.primary,
       ),
+    );
+  }
+
+  static newdisplaySnackBar(BuildContext context, String message,
+      {bool isCom = true}) {
+    IconSnackBar.show(
+      context,
+      snackBarType: isCom ? SnackBarType.success : SnackBarType.fail,
+      label: message,
+    );
+  }
+
+  static newdisplaySnackBar2(BuildContext context, String message,
+      {int isCom = 0}) {
+    IconSnackBar.show(
+      context,
+      snackBarType: isCom == 0
+          ? SnackBarType.success
+          : isCom == 1
+              ? SnackBarType.fail
+              : SnackBarType.alert,
+      label: message,
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:ant_todo_list/data/models/task.dart';
 import 'package:ant_todo_list/providers/date_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -51,7 +52,16 @@ class Helpers {
       lastDate: DateTime(2090),
     );
     if (pickedDate != null) {
-      ref.read(dateProvider.notifier).state = pickedDate;
+      final now = DateTime.now();
+      if (pickedDate.isBefore(DateTime(now.year, now.month, now.day))) {
+        IconSnackBar.show(
+          context,
+          snackBarType: SnackBarType.alert,
+          label: "មិនអាចជ្រើសរើសមុនថ្ងៃ ${now.day} បានទេ",
+        );
+      } else {
+        ref.read(dateProvider.notifier).state = pickedDate;
+      }
     }
   }
 }
